@@ -38,9 +38,9 @@ int main(int argc, char **argv) {
         setTwistVals(twist, 0, -0.5);
         break;
       case "dance":
-        double rand_x = 2*double(rand())/double(RAND_MAX)-1;
-        double rand_y = 2*double(rand())/double(RAND_MAX)-1;
-        setTwistVals(twist, rand_x, rand_y);
+        double rand_speed = 2*double(rand())/double(RAND_MAX)-1;
+        double rand_spin = 2*double(rand())/double(RAND_MAX)-1;
+        setTwistVals(twist, rand_speed, rand_spin);
         break;
     }
     movement_pub.publish(twist);

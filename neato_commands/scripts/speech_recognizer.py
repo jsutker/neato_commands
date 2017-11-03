@@ -1,7 +1,13 @@
 #!/usr/bin/env python
-"""speech recognizer. Takes speech from pyaudio and sends rosmsgs based on speech recognised"""
-
-
+"""speech recognizer. Takes speech from pyaudio and sends rosmsgs based on speech recognised
+Say a command, then wait for it to be interpreted. Saying multiple commands will make the end result take longer.
+Commands:
+"Forward"  = Drive forward
+"Back" = Drive Backward
+"Left" = Turn to the left
+"Right" = Turn to the right
+"Stop" = Stop moving
+"""
 
 
 import rospy
@@ -24,9 +30,8 @@ class Recognize_Speech():
         """Recognizes Speech and publishes to /speech_cmd"""
 
         # obtain audio from the microphone
-        r = sr.Recognizer()
+        r = sr.Recognizer() 
         with sr.Microphone() as source:
-            print("Say something!")
             audio = r.listen(source)
 
 
@@ -35,16 +40,16 @@ class Recognize_Speech():
             # for testing purposes, I'm just using the default API key
             # to use another API key, use `r.recognize_google(audio, key="GOOGLE_SPEECH_RECOGNITION_API_KEY")`
             # instead of `r.recognize_google(audio)`
-
             audiorecognized = r.recognize_google(audio)
 
-            #print("Google Speech Recognition thinks you said " + audiorecognized )
+            #print("Google Speech Recognition thinks you said " + audiorecognized ) 
 
         except:
             pass
 
         if audiorecognized:
-            
+            #If audiorecognized exists, check if it has a command in it
+            #Stop comes first so that it is given priority in case multiple commands are interpreted as one
 
             if "stop" in audiorecognized:
                 self.pub.publish(String('k'))

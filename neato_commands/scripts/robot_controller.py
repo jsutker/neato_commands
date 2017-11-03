@@ -1,21 +1,16 @@
 #!/usr/bin/env python
 """Robot Controller which responds to speech inputs"""
+
 import rospy
 from sensor_msgs.msg import CompressedImage
 from neato_node.msg import Bump
 from geometry_msgs.msg import TwistWithCovariance,Twist,Vector3
 from std_msgs.msg import String
-import sys
-import termios
-import math
 import time
 import tty
 import select
 import sys
 import termios
-import cv2
-import numpy as np
-import cPickle as pickle
 import thread
 from scipy import misc
 from scipy import special
@@ -68,7 +63,7 @@ class Control_Robot():
 
     def forward(self):
         """
-            Sets the velocity to forward onkeypress
+            Sets the velocity to forward on keypress
         """
         #print('forward\r')
         self.linearVector  = Vector3(x=1.0, y=0.0, z=0.0)
